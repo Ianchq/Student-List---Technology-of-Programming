@@ -26,7 +26,7 @@ public:
     void addGrade(const std::string &subject, int grade);
 
     friend std::ostream &operator<<(std::ostream &os, const Student &student);
-    friend std::ostream &operator<<(std::ostream &is, Student &student);
+    friend std::istream &operator>>(std::istream &is, Student &student);
 };
 
 #endif
