@@ -4,6 +4,20 @@ Student::Student() : groupNumber(0) {}
 
 Student::Student(const std::string &name, int group) : fullName(name), groupNumber(group) {}
 
+Student::Student(string str)
+{
+    string name;
+    int group;
+    string subject;
+    int grade;
+    istringstream iss(str);
+    iss >> name >> group >> subject >> grade;
+    this->fullName = name;
+    this->groupNumber = group;
+    this->subject = subject;
+    this->grade = grade;
+}
+
 std::string Student::getFullName() const
 {
     return fullName;
@@ -66,4 +80,53 @@ std::istream &operator>>(std::istream &is, Student &student)
         student.addGrade(subject, grade);
     }
     return is;
+}
+
+double Student::getAvarageGrade() const
+{
+    if (grades.empty())
+        return 0.0;
+
+    int total = 0;
+    for (const auto &grade : grades)
+    {
+        total += grade.second;
+    }
+
+    return static_cast<double>(total) / grades.size();
+}
+
+bool compareStudents(const Student &student1, const Student &student2)
+{
+    return student1.getAvarageGrade() < student2.getAvarageGrade();
+}
+
+void Student::setUnit()
+{
+    std::cout << "Name: ";
+    std::cin >> this->fullName;
+    std::cout << std::endl;
+    std::cout << "Group: ";
+    std::cin >> this->groupNumber;
+    std::cout << std::endl;
+    std::cout << "Subject: ";
+    std::cin >> this->subject;
+    std::cout << std::endl;
+    std::cout << "Grade: ";
+    std::cin >> this->grade;
+    std::cout << std::endl;
+}
+
+void Student::PrintDetails(ostream &os) const
+{
+    os << "Student: ";
+    os << this->fullName << " ";
+    os << this->groupNumber << " ";
+    os << this->subject << " ";
+    os << this->grade << endl;
+}
+
+void Student::ReadDetails(istream &is)
+{
+    is >> fullName >> groupNumber >> subject >> grade;
 }
