@@ -104,6 +104,18 @@ void Keeper::printToConsole()
     }
 }
 
+void Keeper::printToConsolePoor()
+{
+    Node *tmp = head;
+    int i = 0;
+    while (tmp != nullptr)
+    {
+        //cout << i++ << " - ";
+        tmp->PtrGen->PrintDetailsPoor(std::cout);
+        tmp = tmp->next;
+    }
+}
+
 void Keeper::loadToFile(string nameFile)
 {
     ofstream outputFile(nameFile);

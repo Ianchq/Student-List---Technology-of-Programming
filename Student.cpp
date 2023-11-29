@@ -39,6 +39,22 @@ int Student::getGroupNumber() const
     return groupNumber;
 }
 
+const std::vector<SubjectGrade> &Student::getGrades() const
+{
+    return grades;
+}
+
+double Student::getAvarageGrade() const{
+    if (grades.empty()) {
+        return 0.0;
+    }
+    double sum = 0.0;
+    for (const auto &sg : grades){
+        sum+= sg.grade;
+    }
+    return sum/grades.size();
+}
+
 // std::vector<std::pair<std::string, int>> Student::getGrades() const
 // {
 //     return grades;
@@ -62,6 +78,11 @@ void Student::setSubject(int subject)
 void Student::setGrade(int grade)
 {
     this->grade = grade;
+}
+
+void Student::addGrade(const std::string &subject, int grade)
+{
+    grades.push_back({subject, grade});
 }
 
 // void Student::addGrade(const std::string &subject, int grade)
@@ -130,24 +151,72 @@ void Student::setUnit()
     std::cout << "Group: ";
     std::cin >> this->groupNumber;
     std::cout << std::endl;
-    std::cout << "Subject: ";
-    std::cin >> this->subject;
-    std::cout << std::endl;
-    std::cout << "Grade: ";
-    std::cin >> this->grade;
-    std::cout << std::endl;
+    std::string subject;
+        int grade;
+        std::cout << "Enter subjects and grades. Type 'end' to finish." << std::endl;
+        while (true)
+        {
+            std::cout << "Subject: ";
+            std::cin >> subject;
+            if (subject == "end")
+                break;
+
+            std::cout << "Grade: ";
+            std::cin >> grade;
+
+            grades.push_back({subject, grade});
+        }
+    
+//    std::cout << "Subject: ";
+//    std::cin >> this->subject;
+//    std::cout << std::endl;
+//    std::cout << "Grade: ";
+//    std::cin >> this->grade;
+//    std::cout << std::endl;
 }
 
 void Student::PrintDetails(ostream &os) const
 {
     os << "Student: ";
-    os << this->fullName << " ";
-    os << this->groupNumber << " ";
-    os << this->subject << " ";
-    os << this->grade << endl;
+        os << this->fullName << " ";
+        os << this->groupNumber << " ";
+        os << "Grades: ";
+        for (const auto &sg : grades)
+        {
+            os << sg.subject << ": " << sg.grade << " ";
+        }
+        os << "Avarage Grade: " << getAvarageGrade() << std::endl;
+}
+
+void Student::PrintDetailsPoor(ostream &os) const
+{
+    bool foundGrade2 = false;
+       for (const auto &sg : grades)
+       {
+           if (sg.grade == 2)
+           {
+               foundGrade2 = true;
+               os << "Student: ";
+               os << this->fullName << " ";
+               os << this->groupNumber << " ";
+               os << "Subject: " << sg.subject << " ";
+               os << "Grade: " << sg.grade << std::endl;
+           }
+       }
+
+       if (!foundGrade2)
+       {
+           os << "No student with grade 2 found." << std::endl;
+       }
 }
 
 void Student::ReadDetails(istream &is)
 {
-    is >> fullName >> groupNumber >> subject >> grade;
+    is >> fullName >> groupNumber;
+        while (is)
+        {
+            SubjectGrade sg;
+            is >> sg.subject >> sg.grade;
+            grades.push_back(sg);
+        }
 }

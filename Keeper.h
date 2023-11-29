@@ -23,6 +23,7 @@ public:
     void deleteUnit(int pos);
     // void changeUnit(int pos);
     void printToConsole();
+    void printToConsolePoor();
 
     void loadToFile(string nameFile);
     void loadFromFile(string nameFile);
