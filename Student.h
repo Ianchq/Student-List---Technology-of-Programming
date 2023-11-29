@@ -1,6 +1,4 @@
-#ifndef STUDENT_H
-#define STUDENT_H
-
+#pragma once
 #include "iostream"
 #include "vector"
 #include "string"
@@ -19,8 +17,12 @@ private:
 public:
     Student();
     Student(const std::string &name, int group);
-    Student(string str);
-    ~Student();
+    Student(std::string str);
+    Student(const Student &other);
+    virtual ~Student()
+    {
+        std::cout << "Destructor Generalstd" << std::endl;
+    };
 
     std::string getFullName() const;
     int getGroupNumber() const;
@@ -37,7 +39,5 @@ public:
 
     void setUnit();
     void PrintDetails(std::ostream &os) const;
-    void ReadDetails(istream &is);
+    void ReadDetails(std::istream &is);
 };
-
-#endif

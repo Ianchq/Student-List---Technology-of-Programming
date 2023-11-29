@@ -1,4 +1,8 @@
+#pragma once
 #include "Student.h"
+
+class Student;
+
 struct Node
 {
     Student *PtrGen;
@@ -8,7 +12,7 @@ struct Node
     ~Node()
     {
         delete PtrGen;
-        cout << "Destructor Node" << endl;
+        std::cout << "Destructor Node" << std::endl;
 
         system("pause");
     }

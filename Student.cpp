@@ -1,3 +1,4 @@
+#pragma once
 #include "Student.h"
 
 Student::Student() : groupNumber(0) {}
@@ -18,7 +19,15 @@ Student::Student(string str)
     this->grade = grade;
 }
 
-Student::~Student() {}
+Student::Student(const Student &other)
+{
+    this->fullName = other.fullName;
+    this->groupNumber = other.groupNumber;
+    this->subject = other.subject;
+    this->grade = other.grade;
+}
+
+// Student::~Student() {}
 
 std::string Student::getFullName() const
 {
