@@ -18,6 +18,8 @@ Student::Student(string str)
     this->grade = grade;
 }
 
+Student::~Student() {}
+
 std::string Student::getFullName() const
 {
     return fullName;
@@ -28,10 +30,10 @@ int Student::getGroupNumber() const
     return groupNumber;
 }
 
-std::vector<std::pair<std::string, int>> Student::getGrades() const
-{
-    return grades;
-}
+// std::vector<std::pair<std::string, int>> Student::getGrades() const
+// {
+//     return grades;
+// }
 
 void Student::setFullName(const std::string &name)
 {
@@ -43,63 +45,73 @@ void Student::setGroupNumber(int group)
     groupNumber = group;
 }
 
-void Student::addGrade(const std::string &subject, int grade)
+void Student::setSubject(int subject)
 {
-    grades.push_back(std::make_pair(subject, grade));
+    this->subject = subject;
 }
 
-std::ostream &operator<<(std::ostream &os, const Student &student)
+void Student::setGrade(int grade)
 {
-    os << "Name: " << student.fullName << "\nGroup: " << student.groupNumber << "\nGrades:\n";
-    for (const auto &grade : student.grades)
-    {
-        os << grade.first << ": " << grade.second << "\n";
-    }
-    return os;
+    this->grade = grade;
 }
 
-std::istream &operator>>(std::istream &is, Student &student)
-{
-    std::cout << "Enter name: ";
-    std::getline(is, student.fullName);
+// void Student::addGrade(const std::string &subject, int grade)
+// {
+//     grades.push_back(std::make_pair(subject, grade));
+// }
 
-    std::cout << "Enter group number: ";
-    is >> student.groupNumber;
+// std::ostream &operator<<(std::ostream &os, const Student &student)
+// {
+//     os << "Name: " << student.fullName << "\nGroup: " << student.groupNumber << "\nGrades:\n";
+//     for (const auto &grade : student.grades)
+//     {
+//         os << grade.first << ": " << grade.second << "\n";
+//     }
+//     return os;
+// }
 
-    std::cout << "Введите оценки по каждому предмету"; //"end" to stop
-    while (true)
-    {
-        std::string subject;
-        int grade;
+// std::istream &operator>>(std::istream &is, Student &student)
+// {
+//     std::cout << "Enter name: ";
+//     std::getline(is, student.fullName);
 
-        is >> subject;
-        if (subject == "end")
-            break;
-        is >> grade;
+//     std::cout << "Enter group number: ";
+//     is >> student.groupNumber;
 
-        student.addGrade(subject, grade);
-    }
-    return is;
-}
+//     std::cout << "Введите оценки по каждому предмету"; //"end" to stop
+//     while (true)
+//     {
+//         std::string subject;
+//         int grade;
 
-double Student::getAvarageGrade() const
-{
-    if (grades.empty())
-        return 0.0;
+//         is >> subject;
+//         if (subject == "end")
+//             break;
+//         is >> grade;
 
-    int total = 0;
-    for (const auto &grade : grades)
-    {
-        total += grade.second;
-    }
+//         student.addGrade(subject, grade);
+//     }
+//     return is;
+// }
 
-    return static_cast<double>(total) / grades.size();
-}
+// double Student::getAvarageGrade() const
+// {
+//     if (grades.empty())
+//         return 0.0;
 
-bool compareStudents(const Student &student1, const Student &student2)
-{
-    return student1.getAvarageGrade() < student2.getAvarageGrade();
-}
+//     int total = 0;
+//     for (const auto &grade : grades)
+//     {
+//         total += grade.second;
+//     }
+
+//     return static_cast<double>(total) / grades.size();
+// }
+
+// bool compareStudents(const Student &student1, const Student &student2)
+// {
+//     return student1.getAvarageGrade() < student2.getAvarageGrade();
+// }
 
 void Student::setUnit()
 {

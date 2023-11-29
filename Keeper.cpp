@@ -75,22 +75,22 @@ void Keeper::deleteUnit(int pos)
     }
 }
 
-void Keeper::changeUnit(int pos)
-{
-    if (pos < 0 || pos >= count)
-    {
-        throw MyException("Out of range");
-    }
+// void Keeper::changeUnit(int pos)
+// {
+//     if (pos < 0 || pos >= count)
+//     {
+//         throw MyException("Out of range");
+//     }
 
-    Node *tmp = head;
+//     Node *tmp = head;
 
-    for (size_t i = 0; i < pos; i++)
-    {
-        tmp = tmp->next;
-    }
+//     for (size_t i = 0; i < pos; i++)
+//     {
+//         tmp = tmp->next;
+//     }
 
-    tmp->PtrGen->setUnit();
-}
+//     tmp->PtrGen->setUnit();
+// }
 
 void Keeper::printToConsole()
 {

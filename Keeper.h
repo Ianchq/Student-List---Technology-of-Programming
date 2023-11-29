@@ -21,7 +21,7 @@ public:
 
     void addUnit(Student *unit);
     void deleteUnit(int pos);
-    void changeUnit(int pos);
+    // void changeUnit(int pos);
     void printToConsole();
 
     void loadToFile(string nameFile);
