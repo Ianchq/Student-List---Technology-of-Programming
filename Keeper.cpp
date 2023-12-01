@@ -141,11 +141,8 @@ void Keeper::loadFromFile(string nameFile)
     {
         if (readFile >> word)
         {
-            if (word == string("Aircraft"))
-            {
                 getline(readFile, line);
                 this->addUnit(new Student(line));
-            }
             count += 1;
         }
         else
@@ -169,4 +166,40 @@ Node &Keeper::operator[](const int index)
         tmp = tmp->next;
     }
     return *tmp;
+}
+
+void Keeper::sortStudents()
+{
+    if (count <= 1) // Нечего сортировать, если меньше 2 записей
+        return;
+
+    // Создаем временный массив для хранения указателей на записи
+    Student **studentsArray = new Student *[count];
+    Node *current = head;
+    int index = 0;
+
+    // Заполняем массив указателями на записи
+    while (current != nullptr)
+    {
+        studentsArray[index++] = current->PtrGen;
+        current = current->next;
+    }
+
+    // Сортируем массив по среднему баллу
+    std::sort(studentsArray, studentsArray + count, [](const Student *a, const Student *b) {
+        return a->getAvarageGrade() < b->getAvarageGrade();
+    });
+
+    // Перестраиваем связи в списке
+    head = new Node(studentsArray[0]);
+    current = head;
+
+    for (int i = 1; i < count; ++i)
+    {
+        current->next = new Node(studentsArray[i]);
+        current = current->next;
+    }
+
+    // Освобождаем выделенную память
+    delete[] studentsArray;
 }

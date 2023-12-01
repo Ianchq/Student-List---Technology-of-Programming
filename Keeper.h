@@ -5,6 +5,7 @@
 #pragma once
 #include "Student.h"
 #include "Struct.h"
+#include <algorithm>
 
 using namespace std;
 
@@ -24,9 +25,14 @@ public:
     // void changeUnit(int pos);
     void printToConsole();
     void printToConsolePoor();
+    //void sortStudent();
 
     void loadToFile(string nameFile);
     void loadFromFile(string nameFile);
+    
+    void sortStudents();
+    
 
     Node &operator[](const int index);
+    
 };

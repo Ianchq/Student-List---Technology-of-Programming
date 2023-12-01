@@ -23,9 +23,10 @@ void Menu::startMenu()
         std::cout << "1 - Add Element\n";
         std::cout << "2 - Delete Element\n";
         std::cout << "3 - Display poor students\n";
-        std::cout << "4 - Display\n";
-        std::cout << "5 - Save to file\n";
-        std::cout << "6 - Extract from file\n";
+        std::cout << "4 - Sort students from low to high\n";
+        std::cout << "5 - Display\n";
+        std::cout << "6 - Save to file\n";
+        std::cout << "7 - Extract from file\n";
         std::cout << "0 - Exit\n";
         std::cin >> choose;
         switch (choose)
@@ -40,18 +41,26 @@ void Menu::startMenu()
             kep->printToConsolePoor();
             system("pause");
             break;
+                
         case '4':
+            kep->sortStudents();
+            system("pause");
+            break;
+                
+        case '5':
             kep->printToConsole();
             system("pause");
             break;
-        case '5':
+                
+        case '6':
             system("cls");
             cout << "Enter filename:" << endl;
             cin >> filename; // обработать исключение
             system("cls");
             kep->loadToFile(filename);
             break;
-        case '6':
+                
+        case '7':
             system("cls");
             cout << "Enter filename:" << endl;
             cin >> filename; // обработать исключение
