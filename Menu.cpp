@@ -22,11 +22,12 @@ void Menu::startMenu()
         std::cout << "Select command\n";
         std::cout << "1 - Add Element\n";
         std::cout << "2 - Delete Element\n";
-        std::cout << "3 - Display poor students\n";
-        std::cout << "4 - Sort students from low to high\n";
+        std::cout << "3 - Display Poor Students\n";
+        std::cout << "4 - Sort Students from Low to High\n";
         std::cout << "5 - Display\n";
-        std::cout << "6 - Save to file\n";
-        std::cout << "7 - Extract from file\n";
+        std::cout << "6 - Display Lines with 2 Digit Numbers\n";
+        std::cout << "7 - Save to file\n";
+        std::cout << "8 - Extract from file\n";
         std::cout << "0 - Exit\n";
         std::cin >> choose;
         switch (choose)
@@ -41,26 +42,31 @@ void Menu::startMenu()
             kep->printToConsolePoor();
             system("pause");
             break;
-                
+
         case '4':
             kep->sortStudents();
             system("pause");
             break;
-                
+
         case '5':
             kep->printToConsole();
             system("pause");
             break;
-                
+
         case '6':
+            kep->printLinesWithTwoDigitNumbers();
+            system("pause");
+            break;
+
+        case '7':
             system("cls");
             cout << "Enter filename:" << endl;
             cin >> filename; // обработать исключение
             system("cls");
             kep->loadToFile(filename);
             break;
-                
-        case '7':
+
+        case '8':
             system("cls");
             cout << "Enter filename:" << endl;
             cin >> filename; // обработать исключение
@@ -118,24 +124,3 @@ void Menu::menuDelete()
         break;
     }
 }
-
-// void Menu::menuEdit(){
-//     system("cls");
-//     int pos;
-//     while (1)
-//     {
-//         std::cout << "Enter the pos:";
-//         std::cin >> pos;
-
-//         try
-//         {
-//            kep->changeUnit(pos);
-//         }
-//         catch(const MyException& e)
-//         {
-//             std::cerr << e.what() << '\n';
-//             system("pause");
-//         }
-//         break;
-//     }
-// }

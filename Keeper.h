@@ -22,17 +22,15 @@ public:
 
     void addUnit(Student *unit);
     void deleteUnit(int pos);
-    // void changeUnit(int pos);
     void printToConsole();
     void printToConsolePoor();
-    //void sortStudent();
 
     void loadToFile(string nameFile);
     void loadFromFile(string nameFile);
-    
+
     void sortStudents();
-    
+
+    void printLinesWithTwoDigitNumbers();
 
     Node &operator[](const int index);
-    
 };

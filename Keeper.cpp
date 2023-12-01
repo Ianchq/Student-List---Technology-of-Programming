@@ -75,23 +75,6 @@ void Keeper::deleteUnit(int pos)
     }
 }
 
-// void Keeper::changeUnit(int pos)
-// {
-//     if (pos < 0 || pos >= count)
-//     {
-//         throw MyException("Out of range");
-//     }
-
-//     Node *tmp = head;
-
-//     for (size_t i = 0; i < pos; i++)
-//     {
-//         tmp = tmp->next;
-//     }
-
-//     tmp->PtrGen->setUnit();
-// }
-
 void Keeper::printToConsole()
 {
     Node *tmp = head;
@@ -107,10 +90,10 @@ void Keeper::printToConsole()
 void Keeper::printToConsolePoor()
 {
     Node *tmp = head;
-    int i = 0;
+    // int i = 0;
     while (tmp != nullptr)
     {
-        //cout << i++ << " - ";
+        // cout << i++ << " - ";
         tmp->PtrGen->PrintDetailsPoor(std::cout);
         tmp = tmp->next;
     }
@@ -141,8 +124,8 @@ void Keeper::loadFromFile(string nameFile)
     {
         if (readFile >> word)
         {
-                getline(readFile, line);
-                this->addUnit(new Student(line));
+            getline(readFile, line);
+            this->addUnit(new Student(line));
             count += 1;
         }
         else
@@ -170,27 +153,22 @@ Node &Keeper::operator[](const int index)
 
 void Keeper::sortStudents()
 {
-    if (count <= 1) // Нечего сортировать, если меньше 2 записей
+    if (count <= 1)
         return;
 
-    // Создаем временный массив для хранения указателей на записи
     Student **studentsArray = new Student *[count];
     Node *current = head;
     int index = 0;
 
-    // Заполняем массив указателями на записи
     while (current != nullptr)
     {
         studentsArray[index++] = current->PtrGen;
         current = current->next;
     }
 
-    // Сортируем массив по среднему баллу
-    std::sort(studentsArray, studentsArray + count, [](const Student *a, const Student *b) {
-        return a->getAvarageGrade() < b->getAvarageGrade();
-    });
+    std::sort(studentsArray, studentsArray + count, [](const Student *a, const Student *b)
+              { return a->getAvarageGrade() < b->getAvarageGrade(); });
 
-    // Перестраиваем связи в списке
     head = new Node(studentsArray[0]);
     current = head;
 
@@ -200,6 +178,23 @@ void Keeper::sortStudents()
         current = current->next;
     }
 
-    // Освобождаем выделенную память
     delete[] studentsArray;
+}
+
+void Keeper::printLinesWithTwoDigitNumbers()
+{
+    Node *tmp = head;
+    // int i = 0;
+    while (tmp != nullptr)
+    {
+        int groupNumber = tmp->PtrGen->getGroupNumber();
+
+        if (groupNumber >= 10 && groupNumber <= 99)
+        {
+            // cout << i++ << " - ";
+            tmp->PtrGen->PrintDetails(std::cout);
+        }
+
+        tmp = tmp->next;
+    }
 }
