@@ -89,13 +89,33 @@ void Keeper::printToConsole()
 
 void Keeper::printToConsolePoor()
 {
-    Node *tmp = head;
-    // int i = 0;
-    while (tmp != nullptr)
+    bool flagGrade2 = false;
+    bool printedMessage = false;
+
+    Node *current = head;
+
+    while (current != nullptr)
     {
-        // cout << i++ << " - ";
-        tmp->PtrGen->PrintDetailsPoor(std::cout);
-        tmp = tmp->next;
+        const Student *student = current->PtrGen;
+
+        for (const auto &SubjectGrade : student->getGrades())
+        {
+
+            if (SubjectGrade.grade == 2)
+            {
+                student->PrintDetailsPoor(std::cout);
+                flagGrade2 = true;
+                break;
+            }
+        }
+
+        current = current->next;
+    }
+
+    if (!flagGrade2 && !printedMessage)
+    {
+        std::cout << "No students with grade 2 found." << std::endl;
+        printedMessage = true;
     }
 }
 
