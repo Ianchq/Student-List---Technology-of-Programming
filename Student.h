@@ -19,9 +19,10 @@ private:
     // std::vector<std::pair<std::string, int>> grades;
     std::string subject;
     int grade;
-    std::vector<SubjectGrade> grades;
 
 public:
+    
+    std::vector<SubjectGrade> grades;
     Student();
     Student(const std::string &name, int group);
     Student(std::string str);

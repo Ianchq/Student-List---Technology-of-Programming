@@ -176,29 +176,31 @@ void Keeper::sortStudents()
     if (count <= 1)
         return;
 
-    Student **studentsArray = new Student *[count];
-    Node *current = head;
-    int index = 0;
+    Node *current;
+    Node *nextNode;
+    bool swapped;
 
-    while (current != nullptr)
+    do
     {
-        studentsArray[index++] = current->PtrGen;
-        current = current->next;
-    }
+        swapped = false;
+        current = head;
 
-    std::sort(studentsArray, studentsArray + count, [](const Student *a, const Student *b)
-              { return a->getAvarageGrade() < b->getAvarageGrade(); });
+        while (current->next != nullptr)
+        {
+            nextNode = current->next;
 
-    head = new Node(studentsArray[0]);
-    current = head;
+            if (current->PtrGen->getAvarageGrade() > nextNode->PtrGen->getAvarageGrade())
+            {
+                Student *tempStudent = current->PtrGen;
+                current->PtrGen = nextNode->PtrGen;
+                nextNode->PtrGen = tempStudent;
 
-    for (int i = 1; i < count; ++i)
-    {
-        current->next = new Node(studentsArray[i]);
-        current = current->next;
-    }
+                swapped = true;
+            }
 
-    delete[] studentsArray;
+            current = current->next;
+        }
+    } while (swapped);
 }
 
 void Keeper::printLinesWithTwoDigitNumbers()
