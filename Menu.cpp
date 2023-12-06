@@ -14,7 +14,6 @@ Menu::Menu()
 
 void Menu::startMenu()
 {
-    int pos;
     char choose;
     while (1)
     {
@@ -61,7 +60,7 @@ void Menu::startMenu()
         case '7':
             system("cls");
             cout << "Enter filename:" << endl;
-            cin >> filename; // обработать исключение
+            cin >> filename;
             system("cls");
             kep->loadToFile(filename);
             break;
@@ -69,7 +68,7 @@ void Menu::startMenu()
         case '8':
             system("cls");
             cout << "Enter filename:" << endl;
-            cin >> filename; // обработать исключение
+            cin >> filename;
             system("cls");
             try
             {
